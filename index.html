@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Friends Forever ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500;600&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+/* ═══════════════════════════════════════════
+   BEST FRIENDS FOREVER — Premium Stylesheet
+   ═══════════════════════════════════════════ */
+
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-mid: #121828;
+  --sky-top: #0d1133;
+  --sky-mid: #1a1040;
+  --sky-horizon: #3d2060;
+  --sunset: #e8784a;
+  --sunset-soft: #f4a574;
+  --gold: #f0c674;
+  --gold-glow: rgba(240, 198, 116, 0.35);
+  --rose: #e8879a;
+  --rose-soft: rgba(232, 135, 154, 0.25);
+  --lavender: #b8a9d4;
+  --lavender-soft: rgba(184, 169, 212, 0.15);
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-hover: rgba(255, 255, 255, 0.1);
+  --text: #f0ece8;
+  --text-muted: rgba(240, 236, 232, 0.65);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Quicksand', sans-serif;
+  --font-hand: 'Caveat', cursive;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 60px rgba(240, 198, 116, 0.15);
+  --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Background Layers ─── */
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(232, 120, 74, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(184, 169, 212, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 30% at 80% 30%, rgba(240, 198, 116, 0.06) 0%, transparent 50%);
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-hearts span {
+  position: absolute;
+  font-size: 1rem;
+  opacity: 0;
+  animation: floatHeart 12s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+  0% { opacity: 0; transform: translateY(100vh) scale(0.5); }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+}
+
+/* ─── Glass Components ─── */
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+}
+
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.glass-card:hover {
+  border-color: rgba(240, 198, 116, 0.25);
+  box-shadow: var(--shadow-soft), var(--shadow-glow);
+}
+
+/* ─── 3D Tilt Cards ─── */
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ─── Navigation ─── */
+.nav {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0.75rem 1.75rem;
+  width: min(920px, calc(100% - 2rem));
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.nav.scrolled {
+  background: rgba(10, 14, 26, 0.85);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav-crown {
+  color: var(--gold);
+  font-size: 1.1rem;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.15); }
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.75rem;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ─── Buttons ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--sunset) 100%);
+  color: var(--bg-deep);
+  box-shadow: 0 4px 24px rgba(240, 198, 116, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(240, 198, 116, 0.45);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* ─── Hero Section ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.hero-layers {
+  position: absolute;
+  inset: 0;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.layer-sky {
+  background: linear-gradient(
+    180deg,
+    var(--sky-top) 0%,
+    var(--sky-mid) 40%,
+    var(--sky-horizon) 70%,
+    rgba(61, 32, 96, 0.6) 100%
+  );
+}
+
+.layer-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.85;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.layer-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(10, 14, 26, 0.7) 100%),
+    linear-gradient(to bottom, rgba(10, 14, 26, 0.3) 0%, transparent 30%, rgba(10, 14, 26, 0.9) 100%);
+}
+
+.layer-ui {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 720px;
+  animation: fadeUp 1.2s ease-out;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+}
+
+.title-line {
+  display: block;
+}
+
+.title-accent {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--rose) 50%, var(--lavender) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-sign {
+  position: absolute;
+  bottom: 18%;
+  left: 5%;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--gold);
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-sign .sign-icon {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+  opacity: 0.6;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: fadeUp 1.2s ease-out 0.5s both;
+  z-index: 20;
+}
+
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.6); opacity: 0.5; }
+}
+
+/* ─── Sections ─── */
+.section {
+  position: relative;
+  z-index: 10;
+  padding: 7rem 2rem;
+}
+
+.section-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  padding: 0.35rem 1rem;
+  border: 1px solid rgba(240, 198, 116, 0.3);
+  border-radius: 50px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h2,
+.story-text h2,
+.pet-info h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.section-header h2 em,
+.story-text h2 em,
+.pet-info h2 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--lavender) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.handwritten {
+  font-family: var(--font-hand);
+}
+
+/* ─── Reveal Animation ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Story Section ─── */
+.story {
+  background: linear-gradient(180deg, transparent 0%, rgba(18, 24, 40, 0.8) 20%, rgba(18, 24, 40, 0.8) 80%, transparent 100%);
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.story-visual {
+  position: relative;
+}
+
+.story-img-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  aspect-ratio: 4/3;
+}
+
+.story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.story-img-frame:hover .story-img {
+  transform: scale(1.03);
+}
+
+.story-img-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle, var(--rose-soft) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.floating-note {
+  position: absolute;
+  padding: 0.75rem 1.25rem;
+  font-size: 1.1rem;
+  animation: float 5s ease-in-out infinite;
+}
+
+.note-1 {
+  bottom: -1rem;
+  left: -1.5rem;
+  color: var(--rose);
+  animation-delay: -1s;
+}
+
+.note-2 {
+  top: -1rem;
+  right: -1rem;
+  color: var(--lavender);
+  animation-delay: -3s;
+  transform: rotate(3deg);
+}
+
+.story-lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin: 1.5rem 0 2rem;
+  line-height: 1.8;
+}
+
+.story-quote {
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--gold);
+}
+
+.story-quote p {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
+.story-quote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.story-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ─── Adventures Section ─── */
+.adventures {
+  background: linear-gradient(180deg, transparent, rgba(26, 16, 64, 0.3), transparent);
+}
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.checklist-paper {
+  position: relative;
+  padding: 2.5rem 2rem;
+  transform: rotate(-2deg);
+}
+
+.washi-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 80px;
+  height: 24px;
+  background: rgba(74, 126, 181, 0.5);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.checklist-title {
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+.checklist {
+  list-style: none;
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  transition: color var(--transition);
+}
+
+.checklist li.checked {
+  color: var(--text);
+}
+
+.checklist li .check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(240, 198, 116, 0.15);
+  color: var(--gold);
+  font-size: 0.75rem;
+}
+
+.adventure-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.adventure-card {
+  padding: 1.75rem;
+}
+
+.adventure-card .card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.adventure-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.adventure-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ─── Timeline ─── */
+.memories {
+  background: linear-gradient(180deg, transparent, rgba(10, 14, 26, 0.6), transparent);
+}
+
+.timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--rose), var(--lavender));
+  opacity: 0.4;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 2.5rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  top: 1.5rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 20px var(--gold-glow);
+  transform: translateX(-6px);
+}
+
+.timeline-card {
+  padding: 2rem;
+}
+
+.timeline-year {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ─── Interactive Pet Section ─── */
+.pet-section {
+  background: linear-gradient(180deg, transparent, rgba(18, 24, 40, 0.9) 30%, rgba(18, 24, 40, 0.9) 70%, transparent);
+  padding-bottom: 8rem;
+}
+
+.pet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.pet-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 1.5rem 0 2rem;
+  line-height: 1.8;
+}
+
+.pet-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--gold);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pet-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.pet-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--rose-soft) 0%, transparent 70%);
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+.pet-container {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.pet-container.petting {
+  transform: scale(1.05);
+}
+
+.pet-svg {
+  width: min(300px, 80vw);
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease;
+}
+
+.pet-container.petting .pet-svg {
+  filter: drop-shadow(0 20px 40px rgba(232, 135, 154, 0.3));
+}
+
+.pet-tail {
+  transform-origin: 80px 200px;
+  transition: transform 0.3s ease;
+}
+
+.pet-container.petting .pet-tail {
+  animation: wagTail 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes wagTail {
+  from { transform: rotate(-15deg); }
+  to { transform: rotate(15deg); }
+}
+
+.pet-ear-left, .pet-ear-right {
+  transition: transform 0.3s ease;
+}
+
+.pet-container.petting .pet-ear-left {
+  transform: rotate(-8deg);
+}
+
+.pet-container.petting .pet-ear-right {
+  transform: rotate(8deg);
+}
+
+.pet-tongue {
+  transition: opacity 0.3s ease;
+}
+
+.pet-container.petting .pet-tongue {
+  opacity: 1 !important;
+}
+
+.pet-blush {
+  transition: opacity 0.3s ease;
+}
+
+.pet-container.petting .pet-blush {
+  opacity: 0.5 !important;
+}
+
+.pupil {
+  transition: transform 0.1s ease-out;
+}
+
+.pet-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.pet-heart {
+  position: absolute;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: heartFloat 1.5s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes heartFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(1.2);
+  }
+}
+
+.pet-hand {
+  position: absolute;
+  font-size: 2.5rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 20;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.pet-hand.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pet-hand.petting-anim {
+  animation: handPet 0.6s ease-in-out;
+}
+
+@keyframes handPet {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(0.9) rotate(-10deg) translateY(5px); }
+  50% { transform: scale(1.1) rotate(5deg) translateY(-3px); }
+  75% { transform: scale(0.95) rotate(-5deg) translateY(3px); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* ─── Footer ─── */
+.footer {
+  position: relative;
+  z-index: 10;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+}
+
+.footer-title {
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.footer-quote p:last-child {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.footer-stars {
+  margin: 2rem 0 1rem;
+  color: var(--gold);
+  letter-spacing: 1rem;
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .story-grid,
+  .checklist-grid,
+  .pet-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .adventure-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-sign {
+    display: none;
+  }
+
+  .story-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .checklist-paper {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: rgba(10, 14, 26, 0.95);
+    border-radius: var(--radius);
+    gap: 1rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .section {
+    padding: 5rem 1.25rem;
+  }
+
+  .floating-note {
+    position: relative;
+    margin-top: 1rem;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+  .note-1, .note-2 {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 3D Canvas Background -->
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Floating particles layer -->
+  <div class="floating-hearts" id="floatingHearts" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav glass-panel" id="nav">
+    <div class="nav-brand">
+      <span class="nav-crown">♡</span>
+      <span>Best Friends</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#adventures">Adventures</a></li>
+      <li><a href="#memories">Memories</a></li>
+      <li><a href="#pet">Meet Buddy</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- â•â•â• HERO SECTION â•â•â• -->
+  <section class="hero" id="hero">
+    <div class="hero-layers">
+      <!-- Layer 0: Deep sky -->
+      <div class="layer layer-sky" data-speed="0.05"></div>
+      <!-- Layer 1: Hero image -->
+      <div class="layer layer-image" data-speed="0.15">
+        <img
+          src="assets/c__Users_HP_AppData_Roaming_Cursor_User_workspaceStorage_f9c74aab4f60ce390f43185a2fb9aa53_images_ChatGPT_Image_Jun_7__2026__07_54_27_PM-37181a1a-559f-45ef-a496-5045689a27ea.png"
+          alt="Best friends stargazing on a rooftop at twilight"
+          class="hero-img"
+        />
+      </div>
+      <!-- Layer 2: Vignette -->
+      <div class="layer layer-vignette" data-speed="0"></div>
+      <!-- Layer 3: Floating UI cards -->
+      <div class="layer layer-ui" data-speed="0.25">
+        <div class="hero-content">
+          <p class="hero-eyebrow">To infinity and beyond</p>
+          <h1 class="hero-title">
+            <span class="title-line">Best Friends</span>
+            <span class="title-line title-accent">Forever</span>
+          </h1>
+          <p class="hero-subtitle">One day, many memories — a lifetime of friendship ♡</p>
+          <div class="hero-actions">
+            <a href="#story" class="btn btn-primary">Our Story</a>
+            <a href="#pet" class="btn btn-ghost">Meet the Dog</a>
+          </div>
+        </div>
+        <div class="hero-sign glass-card tilt-card" data-tilt>
+          <span class="sign-icon">✦</span>
+          <p>Best Friends Forever ♡</p>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- â•â•â• STORY SECTION â•â•â• -->
+  <section class="story section" id="story">
+    <div class="section-inner">
+      <div class="story-grid">
+        <div class="story-visual parallax-wrap">
+          <div class="story-img-frame tilt-card" data-tilt>
+            <img
+              src="assets/c__Users_HP_AppData_Roaming_Cursor_User_workspaceStorage_f9c74aab4f60ce390f43185a2fb9aa53_images_ChatGPT_Image_Jun_7__2026__08_07_25_PM-2ed2022c-39fc-444c-a557-2eaf60c5841b.png"
+              alt="Hand-drawn scrapbook of best friends and their dog"
+              class="story-img"
+            />
+            <div class="story-img-glow"></div>
+          </div>
+          <div class="floating-note note-1 glass-card">
+            <p class="handwritten">good vibes only</p>
+          </div>
+          <div class="floating-note note-2 glass-card">
+            <p class="handwritten">Our story is my favorite</p>
+          </div>
+        </div>
+        <div class="story-text reveal">
+          <span class="section-tag">Our Story</span>
+          <h2>Life is better with<br /><em>true friends & a dog</em></h2>
+          <p class="story-lead">
+            Some friendships aren't just chapters — they're the whole book.
+            Every late night, every silly talk, every big dream we shared
+            under the same sky.
+          </p>
+          <blockquote class="story-quote glass-card">
+            <p>"Collect moments, not things."</p>
+            <cite>— Us, always</cite>
+          </blockquote>
+          <div class="story-stats">
+            <div class="stat glass-card tilt-card" data-tilt>
+              <span class="stat-num" data-count="∞">∞</span>
+              <span class="stat-label">Inside Jokes</span>
+            </div>
+            <div class="stat glass-card tilt-card" data-tilt>
+              <span class="stat-num" data-count="1000">0</span>
+              <span class="stat-label">Memories Made</span>
+            </div>
+            <div class="stat glass-card tilt-card" data-tilt>
+              <span class="stat-num">♡</span>
+              <span class="stat-label">Forever</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• ADVENTURES CHECKLIST â•â•â• -->
+  <section class="adventures section" id="adventures">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-tag">Adventures</span>
+        <h2>Our checklist of<br /><em>everything we love</em></h2>
+      </div>
+      <div class="checklist-grid">
+        <div class="checklist-paper glass-card tilt-card reveal" data-tilt>
+          <div class="washi-tape"></div>
+          <h3 class="handwritten checklist-title">ADVENTURES</h3>
+          <ul class="checklist">
+            <li class="checked"><span class="check">✓</span> Late Nights</li>
+            <li class="checked"><span class="check">✓</span> Good Food</li>
+            <li class="checked"><span class="check">✓</span> Silly Talks</li>
+            <li class="checked"><span class="check">✓</span> Big Dreams</li>
+            <li class="checked"><span class="check">✓</span> Infinity & Beyond</li>
+          </ul>
+        </div>
+        <div class="adventure-cards">
+          <div class="adventure-card glass-card tilt-card reveal" data-tilt>
+            <div class="card-icon">🌙</div>
+            <h4>Late Night Talks</h4>
+            <p>Those 2 AM conversations that somehow fix everything.</p>
+          </div>
+          <div class="adventure-card glass-card tilt-card reveal" data-tilt>
+            <div class="card-icon">🍕</div>
+            <h4>Good Food</h4>
+            <p>Every meal tastes better when shared with your favorite person.</p>
+          </div>
+          <div class="adventure-card glass-card tilt-card reveal" data-tilt>
+            <div class="card-icon">😂</div>
+            <h4>Silly Talks</h4>
+            <p>The kind of laughter that makes your stomach hurt — in the best way.</p>
+          </div>
+          <div class="adventure-card glass-card tilt-card reveal" data-tilt>
+            <div class="card-icon">✨</div>
+            <h4>Big Dreams</h4>
+            <p>Dream plan do repeat — together, always.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• MEMORIES TIMELINE â•â•â• -->
+  <section class="memories section" id="memories">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-tag">Memories</span>
+        <h2>Moments that made us<br /><em>who we are</em></h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-card tilt-card" data-tilt>
+            <span class="timeline-year">Day One</span>
+            <h4>The Beginning</h4>
+            <p>When two strangers became something much more — best friends.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-card tilt-card" data-tilt>
+            <span class="timeline-year">Every Day</span>
+            <h4>The Little Things</h4>
+            <p>Random texts, shared playlists, and knowing exactly what the other is thinking.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-card tilt-card" data-tilt>
+            <span class="timeline-year">Forever</span>
+            <h4>Still Going</h4>
+            <p>One day many memories — a lifetime of friendship. And we're just getting started.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• INTERACTIVE PET SECTION â•â•â• -->
+  <section class="pet-section section" id="pet">
+    <div class="section-inner">
+      <div class="pet-grid">
+        <div class="pet-info reveal">
+          <span class="section-tag">Meet Buddy</span>
+          <h2>Our loyal<br /><em>furry friend</em></h2>
+          <p class="pet-desc">
+            Hover over Buddy to give pets — on mobile, tap with your finger!
+            Watch those eyes follow you everywhere. ♡
+          </p>
+          <div class="pet-hint glass-card">
+            <span>👆</span>
+            <p>Try petting Buddy!</p>
+          </div>
+        </div>
+        <div class="pet-stage reveal">
+          <div class="pet-glow"></div>
+          <div class="pet-container" id="petContainer">
+            <!-- Interactive SVG German Shepherd -->
+            <svg class="pet-svg" id="petSvg" viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
+              <!-- Tail -->
+              <g class="pet-tail" id="petTail">
+                <path d="M80 200 Q40 160 50 120 Q55 100 70 110" fill="none" stroke="#3d2b1f" stroke-width="14" stroke-linecap="round"/>
+                <path d="M80 200 Q40 160 50 120 Q55 100 70 110" fill="none" stroke="#6b4c35" stroke-width="10" stroke-linecap="round"/>
+              </g>
+              <!-- Body -->
+              <ellipse cx="150" cy="230" rx="70" ry="55" fill="#5c4033"/>
+              <ellipse cx="150" cy="225" rx="60" ry="45" fill="#7a5540"/>
+              <!-- Legs -->
+              <rect x="105" y="260" width="22" height="45" rx="8" fill="#5c4033"/>
+              <rect x="175" y="260" width="22" height="45" rx="8" fill="#5c4033"/>
+              <rect x="130" y="265" width="18" height="40" rx="7" fill="#6b4c35"/>
+              <rect x="158" y="265" width="18" height="40" rx="7" fill="#6b4c35"/>
+              <!-- Head -->
+              <ellipse cx="150" cy="145" rx="55" ry="50" fill="#5c4033"/>
+              <ellipse cx="150" cy="140" rx="48" ry="44" fill="#7a5540"/>
+              <!-- Ears -->
+              <g class="pet-ear pet-ear-left" id="earLeft">
+                <path d="M105 110 L90 60 L120 95" fill="#3d2b1f"/>
+                <path d="M108 108 L95 68 L118 96" fill="#5c4033"/>
+              </g>
+              <g class="pet-ear pet-ear-right" id="earRight">
+                <path d="M195 110 L210 60 L180 95" fill="#3d2b1f"/>
+                <path d="M192 108 L205 68 L182 96" fill="#5c4033"/>
+              </g>
+              <!-- Snout -->
+              <ellipse cx="150" cy="165" rx="30" ry="22" fill="#8b6548"/>
+              <ellipse cx="150" cy="158" rx="22" ry="14" fill="#a07855"/>
+              <!-- Nose -->
+              <ellipse cx="150" cy="152" rx="10" ry="7" fill="#2a1a10"/>
+              <ellipse cx="147" cy="150" rx="3" ry="2" fill="#4a3020" opacity="0.5"/>
+              <!-- Mouth -->
+              <path class="pet-mouth" id="petMouth" d="M150 158 Q145 170 135 168" fill="none" stroke="#3d2b1f" stroke-width="2.5" stroke-linecap="round"/>
+              <path class="pet-mouth-right" d="M150 158 Q155 170 165 168" fill="none" stroke="#3d2b1f" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Tongue (hidden until petted) -->
+              <ellipse class="pet-tongue" id="petTongue" cx="150" cy="175" rx="12" ry="16" fill="#e8879a" opacity="0"/>
+              <!-- Eyes -->
+              <g class="pet-eyes">
+                <ellipse cx="128" cy="130" rx="14" ry="16" fill="#fff"/>
+                <ellipse cx="172" cy="130" rx="14" ry="16" fill="#fff"/>
+                <circle class="pupil" id="pupilLeft" cx="128" cy="132" r="8" fill="#2a1a10"/>
+                <circle class="pupil" id="pupilRight" cx="172" cy="132" r="8" fill="#2a1a10"/>
+                <circle class="eye-shine" cx="125" cy="128" r="3" fill="#fff" opacity="0.9"/>
+                <circle class="eye-shine" cx="169" cy="128" r="3" fill="#fff" opacity="0.9"/>
+              </g>
+              <!-- Collar -->
+              <rect x="108" y="188" width="84" height="12" rx="6" fill="#4a7eb5"/>
+              <circle cx="150" cy="194" r="8" fill="#ffd700"/>
+              <text x="150" y="198" text-anchor="middle" font-size="8" fill="#3d2b1f">★</text>
+              <!-- Blush (shows when petted) -->
+              <ellipse class="pet-blush" cx="115" cy="155" rx="12" ry="6" fill="#ffb6c1" opacity="0"/>
+              <ellipse class="pet-blush" cx="185" cy="155" rx="12" ry="6" fill="#ffb6c1" opacity="0"/>
+            </svg>
+            <div class="pet-hearts" id="petHearts"></div>
+            <div class="pet-hand" id="petHand">🤚</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• FOOTER â•â•â• -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-quote">
+        <p class="handwritten footer-title">Dream Â· Plan Â· Do Â· Repeat</p>
+        <p>Made with infinite love for the best friend in the world ♡</p>
+      </div>
+      <div class="footer-stars" aria-hidden="true">✦ ✧ ✦ ✧ ✦</div>
+      <p class="footer-copy">&copy; Forever & Always — Best Friends Edition</p>
+    </div>
+  </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+/**
+ * Interactive Pet — Eye tracking, hover/tap petting, heart particles
+ */
+(function () {
+  'use strict';
+
+  const container = document.getElementById('petContainer');
+  const svg = document.getElementById('petSvg');
+  const pupilLeft = document.getElementById('pupilLeft');
+  const pupilRight = document.getElementById('pupilRight');
+  const heartsContainer = document.getElementById('petHearts');
+  const hand = document.getElementById('petHand');
+
+  if (!container || !svg) return;
+
+  const MAX_PUPIL_MOVE = 4;
+  const HEART_EMOJIS = ['♥', '💕', '💗', '💖', '♡', '❤️'];
+  let isPetting = false;
+  let heartInterval = null;
+
+  /* ─── Eye Tracking ─── */
+  function trackEyes(clientX, clientY) {
+    const eyes = [
+      { pupil: pupilLeft, cx: 128, cy: 130 },
+      { pupil: pupilRight, cx: 172, cy: 130 },
+    ];
+
+    const rect = svg.getBoundingClientRect();
+    const scaleX = 300 / rect.width;
+    const scaleY = 320 / rect.height;
+
+    const mouseX = (clientX - rect.left) * scaleX;
+    const mouseY = (clientY - rect.top) * scaleY;
+
+    eyes.forEach(({ pupil, cx, cy }) => {
+      const dx = mouseX - cx;
+      const dy = mouseY - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const maxDist = 40;
+      const factor = Math.min(dist / maxDist, 1);
+      const angle = Math.atan2(dy, dx);
+
+      const moveX = Math.cos(angle) * MAX_PUPIL_MOVE * factor;
+      const moveY = Math.sin(angle) * MAX_PUPIL_MOVE * factor;
+
+      pupil.setAttribute('transform', `translate(${moveX}, ${moveY})`);
+    });
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isPetting) trackEyes(e.clientX, e.clientY);
+  });
+
+  /* ─── Spawn Hearts ─── */
+  function spawnHeart(x, y) {
+    const heart = document.createElement('span');
+    heart.className = 'pet-heart';
+    heart.textContent = HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)];
+    heart.style.left = `${x + (Math.random() - 0.5) * 40}px`;
+    heart.style.top = `${y + (Math.random() - 0.5) * 20}px`;
+    heartsContainer.appendChild(heart);
+    setTimeout(() => heart.remove(), 1500);
+  }
+
+  function startHeartStream(clientX, clientY) {
+    const rect = container.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top - 40;
+
+    spawnHeart(x, y);
+    heartInterval = setInterval(() => {
+      spawnHeart(
+        x + (Math.random() - 0.5) * 60,
+        y + (Math.random() - 0.5) * 30
+      );
+    }, 300);
+  }
+
+  function stopHeartStream() {
+    clearInterval(heartInterval);
+    heartInterval = null;
+  }
+
+  /* ─── Hand Animation ─── */
+  function showHand(clientX, clientY) {
+    const rect = container.getBoundingClientRect();
+    hand.style.left = `${clientX - rect.left - 20}px`;
+    hand.style.top = `${clientY - rect.top - 30}px`;
+    hand.classList.add('visible', 'petting-anim');
+    setTimeout(() => hand.classList.remove('petting-anim'), 600);
+  }
+
+  /* ─── Start Petting ─── */
+  function startPetting(clientX, clientY) {
+    if (isPetting) return;
+    isPetting = true;
+    container.classList.add('petting');
+    showHand(clientX, clientY);
+    startHeartStream(clientX, clientY);
+  }
+
+  function stopPetting() {
+    isPetting = false;
+    container.classList.remove('petting');
+    hand.classList.remove('visible');
+    stopHeartStream();
+  }
+
+  /* Desktop: hover */
+  container.addEventListener('mouseenter', (e) => startPetting(e.clientX, e.clientY));
+  container.addEventListener('mousemove', (e) => {
+    if (isPetting) {
+      const rect = container.getBoundingClientRect();
+      hand.style.left = `${e.clientX - rect.left - 20}px`;
+      hand.style.top = `${e.clientY - rect.top - 30}px`;
+    }
+  });
+  container.addEventListener('mouseleave', stopPetting);
+
+  /* Mobile: touch */
+  container.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    startPetting(touch.clientX, touch.clientY);
+  }, { passive: false });
+
+  container.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    if (isPetting) {
+      const rect = container.getBoundingClientRect();
+      hand.style.left = `${touch.clientX - rect.left - 20}px`;
+      hand.style.top = `${touch.clientY - rect.top - 30}px`;
+      spawnHeart(
+        touch.clientX - rect.left,
+        touch.clientY - rect.top - 40
+      );
+    }
+  }, { passive: false });
+
+  container.addEventListener('touchend', stopPetting);
+  container.addEventListener('touchcancel', stopPetting);
+
+  /* Click burst */
+  container.addEventListener('click', (e) => {
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        const rect = container.getBoundingClientRect();
+        spawnHeart(
+          e.clientX - rect.left + (Math.random() - 0.5) * 50,
+          e.clientY - rect.top - 40 + (Math.random() - 0.5) * 30
+        );
+      }, i * 100);
+    }
+  });
+})();
+
+
+/**
+ * Main — Three.js starfield, parallax, 3D tilt, scroll reveals
+ */
+(function () {
+  'use strict';
+
+  /* ═══ THREE.JS STARFIELD ═══ */
+  function initStarfield() {
+    const canvas = document.getElementById('starfield');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    /* Stars */
+    const starCount = 2000;
+    const positions = new Float32Array(starCount * 3);
+    const colors = new Float32Array(starCount * 3);
+    const sizes = new Float32Array(starCount);
+
+    for (let i = 0; i < starCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 40;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 40;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+
+      const warmth = Math.random();
+      colors[i * 3] = 0.8 + warmth * 0.2;
+      colors[i * 3 + 1] = 0.7 + warmth * 0.3;
+      colors[i * 3 + 2] = 0.9;
+
+      sizes[i] = Math.random() * 2 + 0.5;
+    }
+
+    const starGeo = new THREE.BufferGeometry();
+    starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    starGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    const starMat = new THREE.PointsMaterial({
+      size: 0.04,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true,
+    });
+
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    /* Floating orbs */
+    const orbs = [];
+    const orbColors = [0xf0c674, 0xe8879a, 0xb8a9d4];
+    for (let i = 0; i < 6; i++) {
+      const geo = new THREE.SphereGeometry(0.15 + Math.random() * 0.2, 16, 16);
+      const mat = new THREE.MeshBasicMaterial({
+        color: orbColors[i % 3],
+        transparent: true,
+        opacity: 0.15 + Math.random() * 0.1,
+      });
+      const orb = new THREE.Mesh(geo, mat);
+      orb.position.set(
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 8 - 2
+      );
+      orb.userData = {
+        speedX: (Math.random() - 0.5) * 0.003,
+        speedY: (Math.random() - 0.5) * 0.002,
+        baseY: orb.position.y,
+      };
+      scene.add(orb);
+      orbs.push(orb);
+    }
+
+    /* Mouse parallax for 3D scene */
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    let time = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.005;
+
+      stars.rotation.y = time * 0.02;
+      stars.rotation.x = Math.sin(time * 0.3) * 0.05;
+
+      camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.02;
+      camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.02;
+      camera.lookAt(0, 0, 0);
+
+      orbs.forEach((orb) => {
+        orb.position.x += orb.userData.speedX;
+        orb.position.y = orb.userData.baseY + Math.sin(time + orb.position.x) * 0.3;
+        if (Math.abs(orb.position.x) > 10) orb.userData.speedX *= -1;
+      });
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+
+  /* ═══ PARALLAX LAYERS ═══ */
+  function initParallax() {
+    const layers = document.querySelectorAll('.layer[data-speed]');
+    let ticking = false;
+
+    function update() {
+      const scrollY = window.scrollY;
+      layers.forEach((layer) => {
+        const speed = parseFloat(layer.dataset.speed);
+        layer.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
+      });
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  /* ═══ 3D TILT CARDS ═══ */
+  function initTilt() {
+    const cards = document.querySelectorAll('[data-tilt]');
+    const isTouch = 'ontouchstart' in window;
+
+    if (isTouch) return;
+
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `
+          perspective(800px)
+          rotateY(${x * 12}deg)
+          rotateX(${-y * 12}deg)
+          translateZ(10px)
+        `;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(800px) rotateY(0) rotateX(0) translateZ(0)';
+      });
+    });
+  }
+
+  /* ═══ SCROLL REVEAL ═══ */
+  function initReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    );
+    reveals.forEach((el) => observer.observe(el));
+  }
+
+  /* ═══ NAV SCROLL ═══ */
+  function initNav() {
+    const nav = document.getElementById('nav');
+    const toggle = document.getElementById('navToggle');
+    const links = nav?.querySelector('.nav-links');
+
+    window.addEventListener('scroll', () => {
+      nav?.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    toggle?.addEventListener('click', () => {
+      links?.classList.toggle('open');
+    });
+
+    links?.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+  }
+
+  /* ═══ COUNTER ANIMATION ═══ */
+  function initCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        if (isNaN(target)) return;
+
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            el.textContent = target.toLocaleString() + '+';
+            clearInterval(timer);
+          } else {
+            el.textContent = Math.floor(current).toLocaleString();
+          }
+        }, 25);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach((c) => observer.observe(c));
+  }
+
+  /* ═══ FLOATING HEARTS BACKGROUND ═══ */
+  function initFloatingHearts() {
+    const container = document.getElementById('floatingHearts');
+    if (!container) return;
+
+    const hearts = ['♡', '♥', '✦', '✧', '·'];
+    for (let i = 0; i < 20; i++) {
+      const span = document.createElement('span');
+      span.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.animationDelay = `${Math.random() * 12}s`;
+      span.style.animationDuration = `${10 + Math.random() * 8}s`;
+      span.style.fontSize = `${0.5 + Math.random() * 1}rem`;
+      span.style.color = ['#e8879a', '#f0c674', '#b8a9d4'][Math.floor(Math.random() * 3)];
+      container.appendChild(span);
+    }
+  }
+
+  /* ═══ SHOOTING STARS (CSS injection) ═══ */
+  function initShootingStars() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    for (let i = 0; i < 5; i++) {
+      const star = document.createElement('div');
+      star.className = 'shooting-star';
+      star.style.cssText = `
+        position: absolute;
+        top: ${10 + Math.random() * 40}%;
+        left: ${Math.random() * 100}%;
+        width: ${60 + Math.random() * 80}px;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(240,198,116,0.8), transparent);
+        transform: rotate(-35deg);
+        opacity: 0;
+        animation: shoot ${3 + Math.random() * 4}s ease-in-out ${Math.random() * 8}s infinite;
+        pointer-events: none;
+        z-index: 5;
+      `;
+      hero.appendChild(star);
+    }
+
+    if (!document.getElementById('shootStyle')) {
+      const style = document.createElement('style');
+      style.id = 'shootStyle';
+      style.textContent = `
+        @keyframes shoot {
+          0% { opacity: 0; transform: rotate(-35deg) translateX(0); }
+          5% { opacity: 1; }
+          15% { opacity: 0; transform: rotate(-35deg) translateX(300px); }
+          100% { opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }
+
+  /* ═══ INIT ═══ */
+  document.addEventListener('DOMContentLoaded', () => {
+    initStarfield();
+    initParallax();
+    initTilt();
+    initReveal();
+    initNav();
+    initCounters();
+    initFloatingHearts();
+    initShootingStars();
+  });
+})();
+
+  </script>
+</body>
+</html>
